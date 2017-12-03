@@ -6,7 +6,13 @@ class todos extends database\collection
 
     //This is the function to write to find tasks by user ID for listing on their homepage.
     //Don't forget to return the record set see findAll in the collection class
-    public static  function findTasksbyID($userid) {}
+    public static  function findTasksbyID($userid) {
+        $tableName = get_called_class();
+        $sql = 'SELECT * FROM ' . $tableName ' WHERE id =' . $id;
+        return self::getResults($sql);
+    
+    
+    }
 }
 
 ?>
