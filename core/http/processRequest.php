@@ -26,8 +26,8 @@ class processRequest
         $controller_method = $requested_route->method;
 
         //these echo helps figure out the controller name and method
-        echo 'Controller Name: '$controller_name . '</br>';
-        echo 'Controller Method: '$controller_method . '</br>';
+        echo 'Controller Name: ' . $controller_name . '</br>';
+        echo 'Controller Method: ' . $controller_method . '</br>';
 
 
         //I use a static for the controller because it doesn't have any properties
