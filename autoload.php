@@ -71,7 +71,6 @@ public static function routes($class)
 //echo $class . '<br>';
 $path = 'routes/' . str_replace('\\', '/', $class) . '.php';
 //this is useful to see what path is being asked for
-
 //echo $path . '<br>';
 if (is_file($path)) {
 include $path;
