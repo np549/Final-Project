@@ -19,7 +19,7 @@ class accountsController extends http\controller
         self::getTemplate('show_account', $record);
     }
 
-    //to call the show function the url is index.php?page=task&action=list_task
+    //to call the show function the url is index.php?page=accounts&action=all
 
     public static function all()
     {
@@ -38,27 +38,38 @@ class accountsController extends http\controller
     {
         //https://www.sitepoint.com/why-you-should-use-bcrypt-to-hash-stored-passwords/
         //USE THE ABOVE TO SEE HOW TO USE Bcrypt
-        print_r($_POST);
-        //this just shows creating an account.
-        $record = new account();
-        $record->email = "kwilliam@njit.edu";
-        $record->fname = "test2";
-        $record->lname = "cccc2";
-        $record->phone = "4444444";
-        $record->birthday = "0";
-        $record->gender = "male";
-        $record->password = "12345";
-        $record->save();
+      self::getTemplate('register');
         
     }
-
+//this is the function to save the user the new user for registration
     //this is the function to save the user the user profile
     public static function store()
     {
-        print_r($_POST);
+         $user = accounts::findUserbyEmail($_REQUEST['email']);
+ +
+ +
+ +        if ($user == FALSE) {
+ +            $user = new account();
+ +            $user->email = $_POST['email'];
+ +            $user->fname = $_POST['fname'];
+ +            $user->lname = $_POST['lname'];
+ +            $user->phone = $_POST['phone'];
+ +            $user->birthday = $_POST['birthday'];
+ +            $user->gender = $_POST['gender'];
+ +            //$user->password = $_POST['password'];
+ +            $user->password = $user->setPassword($_POST['password']);
+ +            $user->save();
+ +            header("Location: index.php?page=accounts&action=all");
+ +
+ +        } else {
+ +
+ +            echo 'already registered';
+ +        }
 
     }
+self::getTemplate('edit_account', $record);
 
+}
     public static function edit()
     {
         $record = accounts::findOne($_REQUEST['id']);
