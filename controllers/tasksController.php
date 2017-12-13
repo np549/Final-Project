@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kwilliams
- * Date: 11/27/17
- * Time: 5:32 PM
- */
-
 
 //each page extends controller and the index.php?page=tasks causes the controller to be called
 class tasksController extends http\controller
@@ -23,6 +16,17 @@ class tasksController extends http\controller
     public static function all()
     {
         $records = todos::findAll();
+        /*session_start();
+           if(key_exists('userID',$_SESSION)) {
+               $userID = $_SESSION['userID'];
+           } else {
+
+               echo 'you must be logged in to view tasks';
+           }
+        $userID = $_SESSION['userID'];
+
+        $records = todos::findTasksbyID($userID);
+        */
         self::getTemplate('all_tasks', $records);
 
     }
@@ -54,6 +58,16 @@ class tasksController extends http\controller
         $record->body = $_REQUEST['body'];
         $record->save();
         print_r($_POST);
+
+    }
+
+    public static function save() {
+        session_start();
+        $task = new todo();
+
+        $task->body = $_POST['body'];
+        $task->ownerid = $_SESSION['userID'];
+        $task->save();
 
     }
 
