@@ -15,7 +15,8 @@ class tasksController extends http\controller
 
     public static function all()
     {
-        $records = todos::findAll();
+       $records = todos::findAllTask($_REQUEST['id']);
+//var_dump();
         /*session_start();
            if(key_exists('userID',$_SESSION)) {
                $userID = $_SESSION['userID'];
@@ -37,7 +38,8 @@ class tasksController extends http\controller
 
     public static function create()
     {
-        print_r($_POST);
+       // print_r($_POST);
+self::getTemplate('edit_task');
     }
 
     //this is the function to view edit record form
@@ -56,18 +58,28 @@ class tasksController extends http\controller
 
         $record = todos::findOne($_REQUEST['id']);
         $record->body = $_REQUEST['body'];
+$dt = explode('-',$_POST['duedate']); // mm0-dd1-yy2
+		$record->duedate = $dt[2].'-'.$dt[0].'-'.$dt[1];
+		$record->isdone = $_POST['isdone'];
         $record->save();
-        print_r($_POST);
+        header("Location: index.php?page=tasks&action=all&id=".$_POST['ownerid']);
 
     }
 
     public static function save() {
-        session_start();
-        $task = new todo();
+       
 
-        $task->body = $_POST['body'];
-        $task->ownerid = $_SESSION['userID'];
+        $task = new todo();
+		$cdt = date('Y-m-d H:i:s');
+		$dt = explode('-',$_POST['duedate']); // mm0-dd1-yy2
+		$ddt = $dt[2].'-'.$dt[0].'-'.$dt[1];
+        $task->message = trim($_POST['message']);
+        $task->ownerid = trim($_POST['ownerid']);
+		$task->owneremail = trim($_POST['emls']);
+		$task->duedate = $ddt;
+		$task->createddate=trim($_POST['cdate']);
         $task->save();
+header("Location: index.php?page=tasks&action=all&id=".$_POST['ownerid']);
 
     }
 
@@ -77,7 +89,10 @@ class tasksController extends http\controller
     {
         $record = todos::findOne($_REQUEST['id']);
         $record->delete();
-        print_r($_POST);
+       // print_r($_POST);
+//header("Location: index.php?page=tasks&action=all");
+		header("Location: index.php?page=tasks&action=all&id=".$_POST['ownerid']);
+       // print_r($_POST);
 
     }
 
