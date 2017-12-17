@@ -5,7 +5,7 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
 //Autoloader class to load all the different directories
-
+ date_default_timezone_set('UTC');
 include_once "autoload.php";
 
 //put your database credentials here
