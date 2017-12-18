@@ -1,87 +1,61 @@
 <?php
-class Manage
+
+class accounts extends \database\collection
 {
-    public static function core($class)
+    protected static $modelName = 'account';
+
+    //This is the function to write to find user by ID for login.
+    //Don't forget to return the object see findOne in the collection class
+
+
+    public static function findUserbyEmail($email)
     {
 
-//this is useful to see what class and namespace is being asked for
-//echo $class . '<br>';
+            $tableName = get_called_class();
+            $sql = 'SELECT * FROM ' . $tableName . ' WHERE email = ?';
+
+         //grab the only record for find one and return as an object
+            $recordsSet = self::getResults($sql, $email);
+
+            if (is_null($recordsSet)) {
+                return FALSE;
+            } else {
+                return $recordsSet[0];
+            }
 
 
-        $path = 'core/' . str_replace('\\', '/', $class) . '.php';
-//this is useful to see what path is being asked for
 
-//echo $path . '<br>';
-
-        if (is_file($path)) {
-            include $path;
-            return;
-        }
     }
-
-    public static function controllers($class)
+	
+	
+	public static function findUserbysessionid($id)
     {
 
-//this is useful to see what class and namespace is being asked for
-//echo $class . '<br>';
-        $path = 'controllers/' . str_replace('\\', '/', $class) . '.php';
-//this is useful to see what path is being asked for
+            $tableName = get_called_class();
+            $sql = 'SELECT * FROM ' . $tableName . ' WHERE id = ?';
 
-//echo $path . '<br>';
-        if (is_file($path)) {
-            include $path;
-            return;
-        }
+         //grab the only record for find one and return as an object
+            $recordsSet = self::getResults($sql, $id);
+
+            if (is_null($recordsSet)) {
+                return FALSE;
+            } else {
+                return $recordsSet[0];
+            }
+
+
+
     }
-
-    public static function models($class)
-    {
-
-//this is useful to see what class and namespace is being asked for
-//echo $class . '<br>';
-        $path = 'models/' . str_replace('\\', '/', $class) . '.php';
-//this is useful to see what path is being asked for
-
-//echo $path . '<br>';
-        if (is_file($path)) {
-            include $path;
-            return;
-        }
-    }
-
-    public static function collections($class)
-    {
-
-//this is useful to see what class and namespace is being asked for
-//echo $class . '<br>';
-        $path = 'collections/' . str_replace('\\', '/', $class) . '.php';
-//this is useful to see what path is being asked for
-
-//echo $path . '<br>';
-        if (is_file($path)) {
-            include $path;
-            return;
-        }
-    }
-
-    public static function routes($class)
-    {
-
-//this is useful to see what class and namespace is being asked for
-//echo $class . '<br>';
-        $path = 'routes/' . str_replace('\\', '/', $class) . '.php';
-//this is useful to see what path is being asked for
-
-//echo $path . '<br>';
-        if (is_file($path)) {
-            include $path;
-            return;
-        }
-    }
+	
+	 
+	
+	
 }
 
-spl_autoload_register(array('Manage', 'routes'));
-spl_autoload_register(array('Manage', 'controllers'));
-spl_autoload_register(array('Manage', 'collections'));
-spl_autoload_register(array('Manage', 'models'));
-spl_autoload_register(array('Manage', 'core'));
+
+
+
+
+
+
+

@@ -5,7 +5,7 @@ namespace utility;
 
 class htmlTable
 {
-    public static function genarateTableFromMultiArray($array)
+    public static function genarateTableFromMultiArray($array,$st)
     {
 date_default_timezone_set('UTC');
           $tableGen = '<table width="100%" border="1" cellpadding="10">';
