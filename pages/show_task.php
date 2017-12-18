@@ -58,7 +58,7 @@
  <div style="width:70%; margin:0 auto; color:#FFF; background-color:#333; height:80px;">
         <div style="width:40%; float:left;">
             <h1><?php //this how to print some data;
-                 echo "<a href='index.php' style='text-decoration:none; color:#fff;'>".'Mysite'."</a>";?> 
+                 echo "<a href='index.php' style='text-decoration:none; color:#fff;'>".'NJIT TODO'."</a>";?> 
             </h1>
         </div>
         <div style="width:60%; float:right;">

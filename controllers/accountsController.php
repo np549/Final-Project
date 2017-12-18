@@ -33,6 +33,7 @@ class accountsController extends http\controller
         //https://www.sitepoint.com/why-you-should-use-bcrypt-to-hash-stored-passwords/
         //USE THE ABOVE TO SEE HOW TO USE Bcrypt
         self::getTemplate('register');
+        header("Location: index.php");
     }
 
     //this is the function to save the user the new user for registration
