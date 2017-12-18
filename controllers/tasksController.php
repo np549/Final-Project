@@ -56,14 +56,14 @@ self::getTemplate('edit_task');
     {
 
 
-        $record = todos::findOne($_REQUEST['id']);
-        $record->body = $_REQUEST['message'];
-$dt = explode('-',$_POST['duedate']); // mm0-dd1-yy2
+		$record = todos::findOne($_REQUEST['id']);
+        $record->message = $_POST['message'];
+		$dt = explode('-',$_POST['duedate']); // mm0-dd1-yy2
 		$record->duedate = $dt[2].'-'.$dt[0].'-'.$dt[1];
 		$record->isdone = $_POST['isdone'];
         $record->save();
-        header("Location: index.php?page=tasks&action=all&id=".$_POST['ownerid']);
-
+		header("Location: index.php?page=tasks&action=all&id=".$_POST['ownerid']);
+       
     }
 
     public static function save() {

@@ -18,14 +18,27 @@ class homepageController extends http\controller
 //You could get fancy with the homepage and check for the userID in the session and hide/show the login / registration links when no session
 //If there is a session then you should show the user profile link
 //the template is an HTML page with PHP inserted in it.  just put an if/else statement to check for the session and show correct links
-
-
-        $templateData['site_name'] = 'mysite';
+$templateData['site_name'] = 'NJIT TODO';
+		 date_default_timezone_set('UTC');
 
 //template data contains what will show up in the $data variable in the homepage template
 //the name of the template 'homepage' becomes 'homepage.php' in the pages directory
 
         self::getTemplate('homepage', $templateData);
+if(isset($_SESSION['userID']))
+		{
+			$user = accounts::findUserbysessionid($_SESSION['userID']);
+			//var_dump($user);
+			
+			echo "<div style='width:70%; margin:0 auto; padding:10px;'>";  
+			echo "<div style='float:right; text-align:center; padding:4px; width:100%;'><a href=\"index.php?page=accounts&action=show&id=".$_SESSION['userID'] ."\">Edit Account</a></div>";
+					echo "<div style='float:left; padding:4px; width:100%;'><strong>Email Address:</strong> ".$user->email."</div>";
+					echo "<div style='float:left; padding:4px; width:100%;'><strong>Full Name:</strong> ".$user->fname.' '.$user->lname."</div>";
+					echo "<div style='float:left; padding:4px; width:100%;'><strong>Phone Number:</strong> ".$user->phone."</div>";
+					echo "<div style='float:left; padding:4px; width:100%;'><strong>Birthday:</strong> ".date('m-d-Y',strtotime($user->birthday))."</div>";
+					echo "<div style='float:left; padding:4px; width:100%;'><strong>Gender:</strong> ".$user->gender."</div>";
+ 				  echo "</div>";
+		}
     }
 
     public static function create()
