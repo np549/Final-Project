@@ -1,4 +1,6 @@
-
+.body  {
+  color: #f8f9fa;
+}
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -34,4 +36,13 @@
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.footer {
+   position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
 }

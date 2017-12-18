@@ -112,6 +112,21 @@
 
 
 <script src="js/scripts.js"></script>
+<style>
+.footer {
+    position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #9B9999;
+  text-align: center;
+}
+</style>
+
+<div class="footer">
+  <p>Developed by- NAUREEN PATHAN (NP549) </p>
+</div>
 </body>
 </html>
 
