@@ -48,26 +48,28 @@ class accountsController extends http\controller
             $user->fname = $_POST['fname'];
             $user->lname = $_POST['lname'];
             $user->phone = $_POST['phone'];
-            $user->birthday = $_POST['birthday'];
+            $dt = explode('-',$_POST['birthday']); // mm0-dd1-yy2
+            $user->birthday = $dt[2].'-'.$dt[0].'-'.$dt[1];
             $user->gender = $_POST['gender'];
             //$user->password = $_POST['password'];
             //this creates the password
             //this is a mistake you can fix...
             //Turn the set password function into a static method on a utility class.
-            $user->password = $user->setPassword($_POST['password']);
+           $user->password = $_POST['password'];
             $user->save();
 
             //you may want to send the person to a
             // login page or create a session and log them in
             // and then send them to the task list page and a link to create tasks
-            header("Location: index.php?page=accounts&action=all");
+            $templateData['error'] = 'Registered Successfully. Please go for login';
+            self::getTemplate('register', $templateData);
 
         } else {
             //You can make a template for errors called error.php
             // and load the template here with the error you want to show.
            // echo 'already registered';
-            $error = 'already registered';
-            self::getTemplate('error', $error);
+            $templateData['error'] = 'Already Registered';
+            self::getTemplate('register', $templateData);
 
         }
 
@@ -78,6 +80,16 @@ class accountsController extends http\controller
         $record = accounts::findOne($_REQUEST['id']);
 
         self::getTemplate('edit_account', $record);
+  }
+	
+	
+	public static function logout()
+    {
+		session_start();
+        $_SESSION["userID"]='';
+		unset($_SESSION["userID"]);
+ 		session_destroy();
+		header("Location: index.php");
 
     }
 //this is used to save the update form data
@@ -88,10 +100,11 @@ class accountsController extends http\controller
         $user->fname = $_POST['fname'];
         $user->lname = $_POST['lname'];
         $user->phone = $_POST['phone'];
-        $user->birthday = $_POST['birthday'];
+		$dt = explode('-',$_POST['birthday']); // mm0-dd1-yy2
+        $user->birthday = $dt[2].'-'.$dt[0].'-'.$dt[1];
         $user->gender = $_POST['gender'];
         $user->save();
-        header("Location: index.php?page=accounts&action=all");
+        header("Location: index.php");
 
     }
 
@@ -99,7 +112,11 @@ class accountsController extends http\controller
 
         $record = accounts::findOne($_REQUEST['id']);
         $record->delete();
-        header("Location: index.php?page=accounts&action=all");
+        session_start();
+        $_SESSION["userID"]='';
+		unset($_SESSION["userID"]);
+ 		session_destroy();
+		header("Location: index.php");
     }
 
     //this is to login, here is where you find the account and allow login or deny.
@@ -114,20 +131,21 @@ class accountsController extends http\controller
 
         $user = accounts::findUserbyEmail($_REQUEST['email']);
 
-
+//echo $_POST['password'].'----'.$user->password;
         if ($user == FALSE) {
             echo 'user not found';
         } else {
 
-            if($user->checkPassword($_POST['password']) == TRUE) {
+              if($_POST['password'] == $user->password) {
 
                 echo 'login';
 
-                session_start();
+               session_start();
                 $_SESSION["userID"] = $user->id;
-
+				$_SESSION["userEmail"] = $_REQUEST['email'];
+				header("Location: index.php?page=tasks&action=all&id=".$user->id);
                 //forward the user to the show all todos page
-                print_r($_SESSION);
+               // print_r($_SESSION);
             } else {
                 echo 'password does not match';
             }
