@@ -113,7 +113,7 @@
                 <div style="clear:both;"></div>
                 <div style="width:100%;  height:30px;">
                 	<div style="width:40%; float:left;"><label><b>Password : </b></label></div>
-                	<div style="width:60%; float:right;"><input type="password" id="password" name="password"></div>
+                	<div style="width:60%; float:right;"><input type="password" id="password" name="password" minlength="6"></div>
                 </div>
                  <div style="width:100%;  height:30px;">
                 	<div style="width:40%; float:left;"><label>&nbsp;</label></div>
