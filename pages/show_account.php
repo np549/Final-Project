@@ -56,7 +56,7 @@
  
   <div style="width:100%;">
 
- <div style="width:70%; margin:0 auto; color:#FFF; background-color:#333; height:80px;">
+ <div style="width:100%; margin:0 auto; color:#FFF; background-color:#333; height:80px;">
  <div style="width:40%; float:left;">
             <h1><?php //this how to print some data;
                  echo "<a href='index.php' style='text-decoration:none; color:#fff;'>".'NJIT TODO'."</a>";?> 
@@ -92,7 +92,7 @@
           <div id="msg"></div>
 			<div style="width:60%;">
             <form action="index.php?page=accounts&action=delete&id=<?php echo $data->id; ?> " method="post" id="form1">
-    		<button type="submit" form="form1" value="delete">Delete</button>
+    	
 		  </form>
             <form action="index.php?page=accounts&action=save&id=<?php echo $data->id; ?>" id="regFrm" name="regFrm" method="post">
                 <div style="width:100%; height:30px;">

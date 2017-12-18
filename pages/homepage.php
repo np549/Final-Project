@@ -11,51 +11,17 @@
 
     <link rel="stylesheet" href="css/styles.css?v=1.0">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-
+<link rel="stylesheet" href="css/addon.css">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <![endif]-->
-<style>
-	 
 
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: 400;
-}
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}</style>
 </head>
 
 <body>
 
 <div style="width:100%;">
-  <div style="width:70%; margin:0 auto; color:#FFF; background-color:#333; height:80px;">
+  <div style="width:100%; margin:0 auto; color:#FFF; background-color:#333; height:80px;">
         <div style="width:40%; float:left;">
 
 <h1>
